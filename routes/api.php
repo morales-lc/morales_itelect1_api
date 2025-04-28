@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AuthController;
 
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index']);
@@ -13,3 +14,6 @@ Route::prefix('products')->group(function () {
 
 Route::get('categories/{id}/products', [CategoryController::class, 'products']);
 Route::get('categories', [CategoryController::class, 'index']);
+
+
+Route::post('/auth/login', [AuthController::class, 'login']);
