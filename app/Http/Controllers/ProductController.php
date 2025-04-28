@@ -21,19 +21,33 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
         $product = new Product();
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->category_id = $request->category_id; 
+        $product->category_id = $request->category_id;
+    
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('products', 'public');
+            $product->image = $path;
+        }
+    
         $product->save();
     
         return response()->json([
             'message' => "Product successfully saved",
             'product' => $product
-
         ], 201);
     }
+    
 
     /**
      * Display the specified product.
