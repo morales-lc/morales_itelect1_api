@@ -16,6 +16,7 @@ class ProductSeeder extends Seeder
         for ($i = 1; $i <= 50; $i++) {
             Product::create([
                 'name' => "Product $i",
+                'description' => "Description for Product $i",
                 'category_id' => rand(1, 4),
                 'price' => rand(100, 1000)
             ]);

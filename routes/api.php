@@ -12,3 +12,4 @@ Route::prefix('products')->group(function () {
 });
 
 Route::get('categories/{id}/products', [CategoryController::class, 'products']);
+Route::get('categories', [CategoryController::class, 'index']);

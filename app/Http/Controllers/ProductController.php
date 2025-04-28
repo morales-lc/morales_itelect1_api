@@ -23,6 +23,7 @@ class ProductController extends Controller
     {
         $product = new Product();
         $product->name = $request->name;
+        $product->description = $request->description;
         $product->price = $request->price;
         $product->category_id = $request->category_id; 
         $product->save();
@@ -57,6 +58,7 @@ class ProductController extends Controller
         if (!$product) return response()->json(['message' => 'Product not found'], 404);
 
         $product->name = $request->name;
+        $product->description = $request->description;
         $product->price = $request->price;
         $product->category_id = $request->category_id;
         $product->save();
