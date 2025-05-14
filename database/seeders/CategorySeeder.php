@@ -18,21 +18,25 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             [
                 'name' => 'Mobile and Gadgets',
+                'image_path' => 'categories/mobile_and_gadgets.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Wearables',
+                'image_path' => 'categories/wearables.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Accessories',
+                'image_path' => 'categories/accessories.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Kitchen Appliances',
+                'image_path' => 'categories/kitchen_appliances.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
