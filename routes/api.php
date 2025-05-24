@@ -20,7 +20,12 @@ Route::get('categories', [CategoryController::class, 'index']);
 
 // User authentication route for login
 Route::post('/auth/login', [AuthController::class, 'login']);
+// User authentication route for logout (token required)
+Route::middleware('auth:sanctum')->post('/auth/logout', [AuthController::class, 'logout']);
 
+Route::middleware('auth:sanctum')->group(function () {
+    //
+});
 // Get all products for a specific user
 Route::get('user/{user_id}/products', [ProductController::class, 'userProducts']);
 

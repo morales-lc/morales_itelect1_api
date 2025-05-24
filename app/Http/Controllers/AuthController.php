@@ -14,24 +14,39 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        // Find user by username
-        $user = Userinfo::where('username', $request->username)->first();
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-        // Check if user exists and password matches
+        $user = Userinfo::where('email', $request->email)->first();
+
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'message' => 'Invalid login credentials',
             ], 401);
         }
 
-        // Return success response with user info
+        // Create token (requires HasApiTokens on Userinfo model)
+        $token = $user->createToken('auth_token')->plainTextToken;
+
         return response()->json([
             'message' => 'Login successful',
+            'access_token' => $token,
+            'token_type' => 'Bearer',
             'user' => [
                 'id' => $user->id,
                 'username' => $user->username,
                 'email' => $user->email,
             ],
+        ], 200);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'message' => 'Successfully logged out'
         ], 200);
     }
 }
