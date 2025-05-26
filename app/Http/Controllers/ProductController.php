@@ -59,7 +59,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        // Try to find as a product first
+        
         $userProducts = Product::where('user_id', $id)->get();
         if ($userProducts->count() > 0) {
             return response()->json(['data' => $userProducts], 200);

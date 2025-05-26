@@ -4,6 +4,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
 
+use Illuminate\Support\Facades\Route;
+
 // Group product-related routes under 'products' prefix
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index']); // List products
